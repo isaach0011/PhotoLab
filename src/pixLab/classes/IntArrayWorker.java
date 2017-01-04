@@ -48,6 +48,11 @@ public class IntArrayWorker
 	  return largest;
   }
 
+  public int getColTotal(int column)
+  {
+	  int thing = 0;
+	  return thing;
+  }
   /**
    * Method to return the total 
    * @return the total of the values in the array
