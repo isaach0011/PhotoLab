@@ -21,12 +21,34 @@ public class PictureTester
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
-    Picture caterpillar = new Picture("caterpillar.jpg");
+    Picture caterpillar = new Picture("chris.jpg");
     caterpillar.explore();
     caterpillar.mirrorVertical();
     caterpillar.explore();
   }
   
+  public static void testMirrorVerticalRightToLeft()
+  {
+	  Picture barbara = new Picture("chris.jpg");
+	  barbara.explore();
+	  barbara.mirrorVerticalRightToLeft();
+	  //barbara.zeroBlue();
+	  //barbara.zeroRed();
+	  //barbara.zeroGreen();
+	  barbara.explore();
+  }
+  
+  public static void testMirrorHorizontalBottomToTop()
+  {
+	  Picture cody = new Picture("chris.jpg");
+	  cody.explore();
+	  cody.mirrorHorizontalBottomtoTop();
+	  cody.mirrorVerticalRightToLeft();
+	  //cody.zeroBlue();
+	  //cody.zeroGreen();
+	  //cody.zeroRed();
+	  cody.explore();
+  }
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
   {
@@ -59,27 +81,29 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
-    //testKeepOnlyBlue();
-    //testKeepOnlyRed();
-    //testKeepOnlyGreen();
-    //testNegate();
-    //testGrayscale();
-    //testFixUnderwater();
+//    testZeroBlue();
+//    testKeepOnlyBlue();
+//    testKeepOnlyRed();
+//    testKeepOnlyGreen();
+//    testNegate();
+//    testGrayscale();
+//    testFixUnderwater();
     testMirrorVertical();
-    //testMirrorTemple();
-    //testMirrorArms();
-    //testMirrorGull();
-    //testMirrorDiagonal();
-    //testCollage();
-    //testCopy();
-    //testEdgeDetection();
-    //testEdgeDetection2();
-    //testChromakey();
-    //testEncodeAndDecode();
-    //testGetCountRedOverValue(250);
-    //testSetRedToHalfValueInTopHalf();
-    //testClearBlueOverValue(200);
-    //testGetAverageForColumn(0);
+    testMirrorVerticalRightToLeft();
+    testMirrorHorizontalBottomToTop();
+//    testMirrorTemple();
+//    testMirrorArms();
+//    testMirrorGull();
+//    testMirrorDiagonal();
+//    testCollage();
+//    testCopy();
+//    testEdgeDetection();
+//    testEdgeDetection2();
+//    testChromakey();
+//    testEncodeAndDecode();
+//    testGetCountRedOverValue(250);
+//    testSetRedToHalfValueInTopHalf();
+//    testClearBlueOverValue(200);
+//    testGetAverageForColumn(0);
   }
 }
