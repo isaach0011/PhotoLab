@@ -198,6 +198,49 @@ public class Picture extends SimplePicture
 		  }
 	  }
   }
+  
+  public void mirrorDiagonal()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel topRightPixel = null;
+	  Pixel bottomLeftPixel = null;
+
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col = 0; col < pixels[0].length; col++)
+	      {
+	    	  if(row != col && row < pixels[0].length && col < pixels.length)
+	    	  {
+		    	  topRightPixel = pixels[row][col];
+		    	  bottomLeftPixel = pixels[col][row];
+		    	  
+	    		  bottomLeftPixel.setColor(topRightPixel.getColor());
+	    	  }
+	      }
+	  }     
+  }
+  
+  public void mirrorDiagonalUphill()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel topLeft = null;
+	  Pixel bottomRight = null;
+	  int shortest = Math.min(pixels.length, pixels[0].length);
+	  
+	  for(int row = 0; row < shortest; row++)
+	  {
+		  for (int col = 0; col < shortest; col++)
+		  {
+			  if(row + col != shortest - 1)
+			  {
+				  topLeft = pixels[row][col];
+				  bottomRight = pixels[shortest - col - 1][shortest - row - 1];
+				  
+				  topLeft.setColor(bottomRight.getColor());
+			  }
+		  }
+	  }
+  }
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
   {
@@ -215,13 +258,50 @@ public class Picture extends SimplePicture
       {
         
         leftPixel = pixels[row][col];      
-        rightPixel = pixels[row]                       
-                         [mirrorPoint - col + mirrorPoint];
+        rightPixel = pixels[row][mirrorPoint - col + mirrorPoint];
         rightPixel.setColor(leftPixel.getColor());
       }
     }
   }
   
+  public void mirrorGull()
+  {
+	  int mirrorPoint = 225;
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    int count = 0;
+	    Pixel[][] pixels = this.getPixels2D();
+	    
+	    // loop through the rows
+	    for (int row = 230; row < 350; row++)
+	    {
+	      // loop from 13 to just before the mirror point
+	      for (int col = 230; col < 350; col++)
+	      {
+	        
+	        leftPixel = pixels[row][col];      
+	        rightPixel = pixels[row][mirrorPoint - col + mirrorPoint];
+	        rightPixel.setColor(leftPixel.getColor());
+	      }
+	    }
+  }
+  
+  public void mirrorArms()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel bottomPixel = null;
+	  Pixel topPixel = null;
+	  
+	  for (int row = 150; row > 100; row--)
+	  {
+		  for (int col = 100; col <  150; col++)
+		  {
+			  topPixel = pixels[row][col];
+			  bottomPixel = pixels[row][col];
+			  bottomPixel.setColor(topPixel.getColor());
+		  }
+	  }
+  }
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
@@ -288,8 +368,7 @@ public class Picture extends SimplePicture
         leftPixel = pixels[row][col];
         rightPixel = pixels[row][col+1];
         rightColor = rightPixel.getColor();
-        if (leftPixel.colorDistance(rightColor) > 
-            edgeDist)
+        if (leftPixel.colorDistance(rightColor) > edgeDist)
           leftPixel.setColor(Color.BLACK);
         else
           leftPixel.setColor(Color.WHITE);
@@ -297,13 +376,39 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void deteccionDeBordes(int edgeDist)
+  {
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    Pixel[][] pixels = this.getPixels2D();
+	    Color rightColor = null;
+	    Color leftColor = null;
+	    
+	    for (int row = 0; row < pixels.length; row++)
+	    {
+	      for (int col = 0; 
+	           col < pixels[0].length-1; col++)
+	      {
+	        leftPixel = pixels[row][col];
+	        rightPixel = pixels[row][col+1];
+	        rightColor = rightPixel.getColor();
+	        leftColor = leftPixel.getColor();
+	        
+	        if (leftPixel.colorDistance(rightColor) > edgeDist || rightPixel.colorDistance(leftColor) > edgeDist)
+	          leftPixel.setColor(Color.BLACK);
+	        else
+	          leftPixel.setColor(Color.WHITE);
+	      }
+	    }
+	  }
+  
   
   /* Main method for testing - each class in Java can have a main 
    * method 
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
+    Picture beach = new Picture("seagull.jpg");
     beach.explore();
     beach.zeroBlue();
     beach.explore();
