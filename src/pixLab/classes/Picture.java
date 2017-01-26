@@ -292,13 +292,14 @@ public class Picture extends SimplePicture
 	  Pixel bottomPixel = null;
 	  Pixel topPixel = null;
 	  
-	  for (int row = 150; row > 100; row--)
+	  for (int row = 170; row < 190; row++)
 	  {
-		  for (int col = 100; col <  150; col++)
+		  for (int col = 100; col < 300; col++)
 		  {
-			  topPixel = pixels[row][col];
-			  bottomPixel = pixels[row][col];
-			  bottomPixel.setColor(topPixel.getColor());
+		
+			 topPixel = pixels[row][col];
+			 bottomPixel = pixels[row + 20][col];
+			 bottomPixel.setColor(topPixel.getColor());
 		  }
 	  }
   }
@@ -332,7 +333,33 @@ public class Picture extends SimplePicture
       }
     }   
   }
-
+  
+  public void coolCopy(Picture picture, 
+		  			   int startRow, int startCol, 
+		  			   int endRow, int endCol)
+  {
+	  Pixel fromPixel = null;
+	  Pixel toPixel = null;
+	  Pixel[][] toPixels = this.getPixels2D();
+	  Pixel[][] fromPixels = picture.getPixels2D();
+//	  if(fromPixels.length - 1 < endRow)
+//	  {
+//		  endRow = fromPixels.length - 1;
+//	  }
+//	  if(fromPixels[0].length - 1 < endCol)
+//	  {
+//		  endCol = fromPixels[0].length - 1;
+//	  }
+	  for (int fromRow = endRow, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length && ; fromRow++, toRow++)
+	  {
+	    for (int fromCol = endCol, toCol = startCol; fromCol < fromPixels[0].length && toCol < toPixels[0].length; fromCol++, toCol++)
+	    {
+	      fromPixel = fromPixels[fromRow][fromCol];
+	      toPixel = toPixels[toRow][toCol];
+	      toPixel.setColor(fromPixel.getColor());
+	    }
+	  }  
+  }
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
@@ -350,7 +377,13 @@ public class Picture extends SimplePicture
     this.write("collage.jpg");
   }
   
-  
+  public void personalCollage()
+  {
+	  Picture flower1 = new Picture("flower1.jpg");
+	    this.coolCopy(flower1,490,0,590,100);
+	    this.mirrorVertical();
+	    this.write("collage.jpg");
+  }
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
     */
@@ -378,40 +411,98 @@ public class Picture extends SimplePicture
   
   public void deteccionDeBordes(int edgeDist)
   {
-	    Pixel leftPixel = null;
-	    Pixel rightPixel = null;
-	    Pixel[][] pixels = this.getPixels2D();
-	    Color rightColor = null;
-	    Color leftColor = null;
-	    
-	    for (int row = 0; row < pixels.length; row++)
+	  Pixel mainPixel = null;
+	  Pixel rightPixel = null;
+	  Pixel diagonalPixel = null;
+	  Pixel bottomPixel = null;
+	  Pixel[][] pixels = this.getPixels2D();
+	  Color rightColor = null;
+	  Color diagonalColor = null;
+	  Color bottomColor = null;
+	  for (int row = 0; row < pixels.length - 1; row++)
+	  {
+	    for (int col = 0; col < pixels[0].length-1; col++)
 	    {
-	      for (int col = 0; 
-	           col < pixels[0].length-1; col++)
-	      {
-	        leftPixel = pixels[row][col];
-	        rightPixel = pixels[row][col+1];
-	        rightColor = rightPixel.getColor();
-	        leftColor = leftPixel.getColor();
-	        
-	        if (leftPixel.colorDistance(rightColor) > edgeDist || rightPixel.colorDistance(leftColor) > edgeDist)
-	          leftPixel.setColor(Color.BLACK);
-	        else
-	          leftPixel.setColor(Color.WHITE);
-	      }
+          mainPixel = pixels[row][col];
+	      rightPixel = pixels[row][col+1];
+	      bottomPixel = pixels[row + 1][col];
+	      diagonalPixel = pixels[row + 1][col + 1];
+	      rightColor = rightPixel.getColor();
+	      bottomColor = bottomPixel.getColor();
+	      diagonalColor = diagonalPixel.getColor();
+	      
+	      if (mainPixel.colorDistance(rightColor) > edgeDist || mainPixel.colorDistance(bottomColor) > edgeDist || mainPixel.colorDistance(diagonalColor) > edgeDist)
+	        mainPixel.setColor(Color.BLACK);
+	      else
+	        mainPixel.setColor(Color.WHITE);
 	    }
+   }
+  }
+  
+  public void fullRandom()
+  {
+	  Pixel[][] currentPicture = this.getPixels2D();
+	  for (Pixel [] row : currentPicture)
+	  {
+		  for (Pixel currentPixel : row)
+		  {
+			  int red = (int) (Math.random() * 256);
+			  int green = (int) (Math.random() * 256);
+			  int blue = (int) (Math.random() * 256);
+			  
+			  currentPixel.setColor(new Color(red, green, blue));
+		  }
 	  }
+  }
   
+  public void fullRandomGreen()
+  {
+	  Pixel[][] currentPicture = this.getPixels2D();
+	  for (Pixel [] row : currentPicture)
+	  {
+		  for (Pixel currentPixel : row)
+		  {
+			  	int green = (int) (Math.random() * 256);
+			  	
+			  	currentPixel.setColor(new Color(currentPixel.getRed(), green, currentPixel.getBlue()));
+		  }
+	  }
+  }
   
+  public void fullRandomBlue()
+  {
+	  Pixel[][] currentPicture = this.getPixels2D();
+	  for (Pixel [] row : currentPicture)
+	  {
+		  for (Pixel currentPixel : row)
+		  {
+			  	int blue = (int) (Math.random() * 256);
+			  	
+			  	currentPixel.setBlue(blue);
+		  }
+	  }
+  }
+  
+  public void fullRandomRed()
+  {
+	  Pixel[][] currentPicture = this.getPixels2D();
+	  for (Pixel [] row : currentPicture)
+	  {
+		  for (Pixel currentPixel : row)
+		  {
+			  	int red = (int) (Math.random() * 256);
+			  	
+			  	currentPixel.setRed(red);
+		  }
+	  }
+  }
   /* Main method for testing - each class in Java can have a main 
    * method 
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("seagull.jpg");
-    beach.explore();
-    beach.zeroBlue();
-    beach.explore();
+	  PictureTester app = new PictureTester();
+	  app.start();
   }
   
 } // this } is the end of class Picture, put all new methods before this

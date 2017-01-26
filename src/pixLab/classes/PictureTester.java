@@ -102,7 +102,7 @@ public class PictureTester
   public static void testCollage()
   {
     Picture canvas = new Picture("640x480.jpg");
-    canvas.createCollage();
+    canvas.personalCollage();
     canvas.explore();
   }
   
@@ -117,42 +117,42 @@ public class PictureTester
   public static void testDeteccionDeBordes()
   {
 	  Picture chris = new Picture("swan.jpg");
-	  chris.deteccionDeBordes(15);
+	  chris.deteccionDeBordes(40);
 	  chris.explore();
   }
   /** Main method for testing.  Every class can have a main
     * method in Java */
-  public static void main(String[] args)
+  public void start()
   {
-    // uncomment a call here to run a test
-    // and comment out the ones you don't want
-    // to run
-//    testZeroBlue();
-//    testKeepOnlyBlue();
-//    testKeepOnlyRed();
-//    testKeepOnlyGreen();
-//    testNegate();
-//    testGrayscale();
-//    testFixUnderwater();
-//	testMirrorDiagonal();
-//	testMirrorDiagonalUphill();
-//    testMirrorVertical();
- //   testMirrorVerticalRightToLeft();
- //   testMirrorHorizontalBottomToTop();
-//    testMirrorTemple();
-    testMirrorArms();
-    testDeteccionDeBordes();
-    testMirrorGull();
-//    testMirrorDiagonal();
-//    testCollage();
-//    testCopy();
-//    testEdgeDetection();
-//    testEdgeDetection2();
-//    testChromakey();
-//    testEncodeAndDecode();
-//    testGetCountRedOverValue(250);
-//    testSetRedToHalfValueInTopHalf();
-//    testClearBlueOverValue(200);
-//    testGetAverageForColumn(0);
+	    // uncomment a call here to run a test
+	    // and comment out the ones you don't want
+	    // to run
+//	    testZeroBlue();
+//	    testKeepOnlyBlue();
+//	    testKeepOnlyRed();
+//	    testKeepOnlyGreen();
+//	    testNegate();
+//	    testGrayscale();
+//	    testFixUnderwater();
+//		testMirrorDiagonal();
+//		testMirrorDiagonalUphill();
+//	    testMirrorVertical();
+	 //   testMirrorVerticalRightToLeft();
+	 //   testMirrorHorizontalBottomToTop();
+//	    testMirrorTemple();
+	//    testMirrorArms();
+	//    testDeteccionDeBordes();
+	  //  testMirrorGull();
+//	    testMirrorDiagonal();
+	    testCollage();
+//	    testCopy();
+//	    testEdgeDetection();
+//	    testEdgeDetection2();
+//	    testChromakey();
+//	    testEncodeAndDecode();
+//	    testGetCountRedOverValue(250);
+//	    testSetRedToHalfValueInTopHalf();
+//	    testClearBlueOverValue(200);
+//	    testGetAverageForColumn(0);
   }
 }
