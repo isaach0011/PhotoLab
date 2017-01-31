@@ -350,9 +350,9 @@ public class Picture extends SimplePicture
 //	  {
 //		  endCol = fromPixels[0].length - 1;
 //	  }
-	  for (int fromRow = endRow, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length; fromRow++ , toRow++)
+	  for (int fromRow = 0, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length && toRow < endRow; fromRow++ , toRow++)
 	  {
-	    for (int fromCol = endCol, toCol = startCol; fromCol < fromPixels[0].length && toCol < toPixels[0].length; fromCol++, toCol++)
+	    for (int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length && toCol < toPixels[0].length && toCol < endCol; fromCol++, toCol++)
 	    {
 	      fromPixel = fromPixels[fromRow][fromCol];
 	      toPixel = toPixels[toRow][toCol];
@@ -389,6 +389,12 @@ public class Picture extends SimplePicture
 	  this.copy(america, 150, 859);
 	  this.copy(mexico, 300, 849);
 	  this.copy(america, 450, 859);
+  }
+  
+  public void copyTest()
+  {
+	  Picture mexico = new Picture("mexico.jpg");
+	  this.coolCopy(mexico, 0, 940, 120, 1000);
   }
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
