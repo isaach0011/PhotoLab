@@ -142,6 +142,7 @@ public class Picture extends SimplePicture
         rightPixel.setColor(leftPixel.getColor());
       }
     } 
+    addMessage("Hi", 10, 10);
   }
   
   public void mirrorVerticalRightToLeft()
@@ -449,6 +450,25 @@ public class Picture extends SimplePicture
 	        mainPixel.setColor(Color.WHITE);
 	    }
    }
+  }
+  
+  public void glitchArt()
+  {
+	  Pixel[][] currentPicture = this.getPixels2D();
+	  Picture beach = new Picture("beach.jpg");
+	  for (int helloWorld = 0; helloWorld < (int) (Math.random() * 25); helloWorld++)
+	  {
+		 // this.coolCopy(beach, (helloWorld * 10), (helloWorld * 10), 640, 480);
+		  this.coolCopy(beach, (int) (Math.random() * 480), (int) (Math.random() * 640), (int) (Math.random() * 480), (int) (Math.random() * 640));
+		  this.zeroBlue();
+		  this.fullRandomBlue();
+		  for (int yo = 0; yo < (int) (Math.random() * 25); yo++)
+		  {
+			  this.coolCopy(beach, (int) (Math.random() * 480), (int) (Math.random() * 640), (int) (Math.random() * 480), (int) (Math.random() * 640));
+			  this.zeroRed();
+			  this.fullRandomRed();
+		  }
+	  }
   }
   
   public void fullRandom()

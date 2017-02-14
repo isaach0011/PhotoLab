@@ -127,11 +127,25 @@ public class PictureTester
     swan.explore();
   }
   
+  public static void testGlitch()
+  {
+	  Picture beach = new Picture("beach.jpg");
+	  beach.glitchArt();
+	  beach.explore();
+  }
   public static void testDeteccionDeBordes()
   {
 	  Picture chris = new Picture("swan.jpg");
 	  chris.deteccionDeBordes(40);
 	  chris.explore();
+  }
+  
+  public static void valentineFilter()
+  {
+	  Picture rollsafe = new Picture("rollsafe.jpg");
+	  rollsafe.addCustomMessage("You can't get rejected if you don't ask them out", 10, 25);
+	  rollsafe.explore();
+	  rollsafe.write("rollsafevalentine.jpg");
   }
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -140,7 +154,8 @@ public class PictureTester
 	    // uncomment a call here to run a test
 	    // and comment out the ones you don't want
 	    // to run
-//	    testZeroBlue();
+	 //   testZeroBlue();
+	    testGlitch();
 //	    testKeepOnlyBlue();
 //	    testKeepOnlyRed();
 //	    testKeepOnlyGreen();
@@ -159,7 +174,7 @@ public class PictureTester
 //	    testMirrorDiagonal();
 	//    testCollage();
 	//    testPersonalCollage();
-	  testCoolCopy();
+//	  valentineFilter();
 //	    testCopy();
 //	    testEdgeDetection();
 //	    testEdgeDetection2();
