@@ -131,6 +131,7 @@ public class PictureTester
   {
 	  Picture beach = new Picture("beach.jpg");
 	  beach.glitchArt();
+	  beach.write("Isaac's_Awesome_Glitch_Art.jpg");
 	  beach.explore();
   }
   public static void testDeteccionDeBordes()
@@ -147,6 +148,23 @@ public class PictureTester
 	  rollsafe.explore();
 	  rollsafe.write("rollsafevalentine.jpg");
   }
+  
+  public static void testSteganography()
+  {
+	  Picture brick = new Picture("brick.jpg");
+	  Picture brickPic = new Picture("brick.jpg");
+	  Picture hidden = new Picture("hiddenpicture.jpg");
+	  Picture hiddenPicture = new Picture("hidden.jpg");
+	  brick.encode(hidden);
+	  brick.explore();
+	  brick.decode();
+	  brick.explore();
+	  brickPic.encode(hiddenPicture);
+	  brickPic.decode();
+	  brickPic.explore();
+	  
+  }
+  
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public void start()
@@ -155,7 +173,8 @@ public class PictureTester
 	    // and comment out the ones you don't want
 	    // to run
 	 //   testZeroBlue();
-	    testGlitch();
+	  //  testGlitch();
+	    testSteganography();
 //	    testKeepOnlyBlue();
 //	    testKeepOnlyRed();
 //	    testKeepOnlyGreen();
