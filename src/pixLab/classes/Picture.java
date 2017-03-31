@@ -449,7 +449,7 @@ public class Picture extends SimplePicture
 	      else
 	        mainPixel.setColor(Color.WHITE);
 	    }
-   }
+      }
   }
   
   public void glitchArt()
@@ -580,6 +580,30 @@ public class Picture extends SimplePicture
 			  }
 		  }
 	  }
+  }
+  
+  public void chromakey(Picture pic)
+  {
+	  Pixel[][] greenScreen = this.getPixels2D();
+	  Pixel[][] hidden = pic.getPixels2D();
+	  Pixel sourcePixel = null;
+	  Pixel hiddenPixel = null;
+	  
+	  for(int row = 0; row < greenScreen.length; row++)  
+	  {
+		  for(int col = 0; col < greenScreen[0].length; col++)
+		  {
+			  sourcePixel = greenScreen[row][col];
+			  hiddenPixel = hidden[row][col];
+			  
+			  Color greenScreenColor = new Color(22, 209, 2);
+			  Color basePic
+			  if(sourcePixel.getColor() == greenScreenColor)
+			  {
+				  sourcePixel.setColor(Color.);
+			  }
+		  }
+	  } 
   }
   /* Main method for testing - each class in Java can have a main 
    * method 
